@@ -2,10 +2,10 @@
 Very simple webpage that views images in random order
 
 ## To Use
-press "upload" to upload a folder (it doesn't upload to any server, just into the browser)
-← ↑ go to previous image
-→ ↓ go to next image
-press "refresh" or r to shuffle again
+* press "upload" to upload a folder (it doesn't upload to any server, just into the browser)
+* ← ↑ go to previous image
+* → ↓ go to next image
+* press "refresh" or r to shuffle again
 
 ## Author
 Haofan Zhang
