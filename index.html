@@ -1,194 +1,20 @@
 <html>
 
 <head>
-  <style>
-    .rotate {
-      float: left;
-      transform: translate(-8px, -20px) rotate(270deg);
-      margin-top: 40px;
-    }
-
-    #buttondiv {
-      width: 3%;
-    }
-
-    #imagediv {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: 97%;
-      height: 100%;
-      text-align: center;
-      background: black;
-    }
-
-    #image {
-      max-width: 100%;
-      max-height: 100%;
-    }
-
-    #indexText {
-      margin-left: 14px;
-    }
-
-    body {
-      margin: 0
-    }
-  </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
   <input id="reel" type="file" webkitdirectory mozdirectory hidden></input>
-  <div id="buttondiv">
+  <div id="buttonDiv">
     <button id="upload" class="rotate">upload</button>
     <button id="refresh" class="rotate">refresh</button>
     <p id="indexText">?</p>
   </div>
-  <div id="imagediv" alt="Italian Trulli">
+  <div id="imageDiv" alt="Italian Trulli">
     <!-- <img id="image" src="1.gif"> -->
   </div>
+  <script src="index.js"></script>
 </body>
-<script>
-  "use strict";
-
-  const uploadButton = document.getElementById("upload");
-  const reelUploadButton = document.getElementById("reel");
-  const image = document.getElementById("image");
-  const imagediv = document.getElementById("imagediv");
-  const refreshButton = document.getElementById("refresh");
-  const indexText = document.getElementById("indexText");
-  let shower, images;
-
-
-  class NoDuplicateRandomNumberGenerator {
-    constructor(max) {
-      this.max = max;
-      this.available = [...Array(this.max).keys()];
-    }
-
-    getNextRand() {
-      const len = this.available.length;
-      if (len <= 0) {
-        return null;
-      }
-      const randIndex = this.getRandomInt(len);
-      const randNum = this.available[randIndex];
-      this.available.splice(randIndex, 1);
-      return randNum;
-    }
-
-    getRandomInt(max) {
-      return Math.floor(Math.random() * Math.floor(max));
-    }
-  }
-
-  class ImageShower {
-    constructor(images) {
-      this.images = images;
-      this.len = this.images.length;
-      this.currentIndex = 0;
-      this.reader = new FileReader();
-      this.reader.onload = this.imageHandler;
-    }
-
-    firstImage() {
-      this.currentIndex = 0;
-      this.showImage(this.currentIndex);
-    }
-
-    nextImage() {
-      if (this.currentIndex < this.len) {
-        this.currentIndex++;
-      }
-      if (this.currentIndex >= this.len) {
-        imagediv.innerHTML = `<p style="color:white;">end</p>`;
-      } else {
-        this.showImage(this.currentIndex);
-      }
-    }
-
-    prevImage() {
-      if (this.currentIndex >= 0) {
-        this.currentIndex--;
-      }
-      if (this.currentIndex < 0) {
-        imagediv.innerHTML = `<p style="color:white;">start</p>`;
-      } else {
-        this.showImage(this.currentIndex);
-      }
-    }
-
-    imageHandler(e2) {
-      imagediv.innerHTML = '<img id="image" src="' + e2.target.result + '">';
-    }
-
-    showImage(index) {
-      indexText.innerText = index;
-      const file = this.images[index];
-      console.log(file.name);
-      this.reader.readAsDataURL(file);
-    }
-  }
-
-
-
-
-  function loadDir(e1) {
-    const files = reelUploadButton.files;
-    images = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (file.name.endsWith(".jpg")
-        || file.name.endsWith(".jpeg")
-        || file.name.endsWith(".png")
-        || file.name.endsWith(".gif")) {
-        images.push(file);
-      }
-    }
-    refresh();
-  }
-
-
-  function refresh() {
-    if (!images) return;
-    const numImages = images.length;
-    const randGen = new NoDuplicateRandomNumberGenerator(numImages);
-    const randomImages = [];
-    images.forEach(() => {
-      randomImages.push(images[randGen.getNextRand()]);
-    })
-    shower = new ImageShower(randomImages);
-    shower.firstImage();
-  }
-
-
-
-  uploadButton.onclick = (evt) => {
-    reelUploadButton.click();
-  }
-
-  refreshButton.onclick = (evt) => {
-    refresh();
-  }
-
-  window.onload = function () {
-    reelUploadButton.addEventListener('change', loadDir, false);
-  }
-
-
-  window.onkeyup = function (e) {
-    if (!shower) return;
-    var key = e.keyCode ? e.keyCode : e.which;
-    if (key == 37 || key == 38) {
-      shower.prevImage();
-    } else if (key == 39 || key == 40) {
-      shower.nextImage();
-    } else if (key == 82) {
-      refresh();
-    }
-  }
-
-</script>
 
 </html>
