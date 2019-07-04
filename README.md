@@ -1,6 +1,8 @@
 # random-image-viewer
 Very simple webpage that views images in random order
 
+<a>https://hzhang1902.github.io/random-image-viewer/index.html</a>
+
 ## To Use
 * press "upload" to upload a folder (it doesn't upload to any server, just into the browser)
 * ← ↑ go to previous image
