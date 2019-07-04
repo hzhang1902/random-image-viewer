@@ -1,7 +1,7 @@
 # random-image-viewer
 Very simple webpage that views images in random order
 
-## to use
+## To Use
 press "upload" to upload a folder (it doesn't upload to any server, just into the browser)
 ← ↑ go to previous image
 → ↓ go to next image
@@ -10,7 +10,7 @@ press "refresh" or r to shuffle again
 ## Author
 Haofan Zhang
 
-## liscence
+## Liscence
 MIT
 Copyright <2019> <Haofan Zhang>
   
