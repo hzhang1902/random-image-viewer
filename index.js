@@ -22,42 +22,15 @@ window.onload = function () {
   reelUploadButton.addEventListener('change', loadDir, false);
 }
 
-window.onkeydown = function (e) {
+window.onkeyup = function (e) {
   if (!shower) return;
   var key = e.keyCode ? e.keyCode : e.which;
   if (key == 37 || key == 38) {
     shower.prevImage();
-    // traverse(shower, shower.prevImage)
   } else if (key == 39 || key == 40) {
     shower.nextImage();
-    // traverse(shower, shower.nextImage)
   }
 }
-
-// window.onkeyup = function (e) {
-//   if (!shower) return;
-//   var key = e.keyCode ? e.keyCode : e.which;
-//   if (key == 37 || key == 38) {
-//     // shower.prevImage();
-//     traversing = false;
-//   } else if (key == 39 || key == 40) {
-//     // shower.nextImage();
-//     traversing = false;
-//   } else if (key == 82) {
-//     refresh();
-//   }
-// }
-
-// function traverse (thisArg, action) {
-//   // setTimeout(()=>{
-//     traversing = true;
-//     const handlerIndex = setInterval(()=>{
-//       console.log("called")
-//       if (traversing) action.call(thisArg)
-//       else clearInterval(handlerIndex)
-//     }, 500)
-//   // }, 500)
-// }
 
 class NoDuplicateRandomNumberGenerator {
   constructor(max) {
